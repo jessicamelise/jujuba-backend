@@ -1,0 +1,4 @@
+fastapi[all]
+SQLAlchemy==1.4.40
+python-jose[cryptography]
+passlib[bcrypt]
