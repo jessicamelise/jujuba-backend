@@ -49,14 +49,11 @@ pip install -r requirements.txt
 ```
 
 ### Credenciais Para Acessar no PostgreSQL
-- Crie um arquivo db_credential.py
+- Crie um arquivo .env na raiz do projeto
 
 - Dentro desse arquivo coloque o seguinte conteúdo:
 ```
-db = {
-   
-   "POSTGRE_DATABASE_URL": "postgresql://user:password@localhost/name_db"
-}
+DATABASE_URL='postgresql://user:password@localhost/name_db'
 ```
 
 ### Criando o Bando de Dados
