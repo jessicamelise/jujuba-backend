@@ -48,6 +48,24 @@ deactivate
 pip install -r requirements.txt
 ```
 
+### Credenciais Para Acessar no PostgreSQL
+- Crie um arquivo db_credential.py
+
+- Dentro desse arquivo coloque o seguinte conteúdo:
+```
+db = {
+   
+   "POSTGRE_DATABASE_URL": "postgresql://user:password@localhost/name_db"
+}
+```
+
+### Criando o Bando de Dados
+- Rode o comando:
+```
+python create_db.py
+```
+
+
 ### Rodar Aplicação
 - Utilizar o comando:
 ```
@@ -57,3 +75,4 @@ uvicorn main:app --reload
 ```
 http://localhost:8000/docs
 ```
+- Ou aperte F5 que já rodará aplicação com o debbuger
