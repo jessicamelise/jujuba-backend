@@ -2,11 +2,14 @@ from click import echo
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from db_credential import db
+from dotenv import load_dotenv
+import os
 
-POSTGRE_DATABASE_URL = db.get('POSTGRE_DATABASE_URL')
+load_dotenv()
 
-engine=create_engine(POSTGRE_DATABASE_URL, echo=True)
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+engine=create_engine(DATABASE_URL, echo=True)
 
 Base = declarative_base()
 
