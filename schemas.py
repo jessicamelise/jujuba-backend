@@ -11,3 +11,4 @@ class BaseUser(BaseModel):
 
 class User(BaseUser):
     id: int
+    
