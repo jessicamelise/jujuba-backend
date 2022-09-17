@@ -58,5 +58,5 @@ app = FastAPI()
 
 @app.get("/", status_code=200)
 def test():
-    Base.metadata.create_all(engine)
+    # Base.metadata.create_all(engine)
     return engine.url
