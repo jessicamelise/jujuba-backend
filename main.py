@@ -7,8 +7,9 @@ from fastapi import FastAPI, status
 # import models
 
 from dotenv import load_dotenv
-
 load_dotenv()
+
+from database import Base, SessionLocal, engine
 
 app = FastAPI()
 
@@ -57,6 +58,5 @@ app = FastAPI()
 
 @app.get("/", status_code=200)
 def test():
-    from database import Base, SessionLocal, engine
     Base.metadata.create_all(engine)
     return engine.url
