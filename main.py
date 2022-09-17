@@ -8,6 +8,13 @@ from fastapi import FastAPI, status
 
 # import models
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+DATABASE_URL = os.getenv('DATABASE_URL')
+
 app = FastAPI()
 
 # db=SessionLocal()
@@ -55,4 +62,4 @@ app = FastAPI()
 
 @app.get("/", status_code=200)
 def test():
-    return "teste"
+    return DATABASE_URL
