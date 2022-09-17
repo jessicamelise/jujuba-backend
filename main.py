@@ -4,8 +4,6 @@ from fastapi import FastAPI, status
 
 # from schemas import BaseUser, User
 
-from database import Base, SessionLocal, engine
-
 # import models
 
 from dotenv import load_dotenv
@@ -62,5 +60,7 @@ app = FastAPI()
 
 @app.get("/", status_code=200)
 def test():
+    print('teste')
+    from database import Base, SessionLocal, engine
     Base.metadata.create_all(engine)
     return DATABASE_URL
