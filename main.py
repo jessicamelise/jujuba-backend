@@ -4,7 +4,7 @@ from fastapi import FastAPI, status
 
 # from schemas import BaseUser, User
 
-# from database import SessionLocal
+from database import SessionLocal
 
 # import models
 
