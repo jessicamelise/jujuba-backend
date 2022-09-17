@@ -7,11 +7,8 @@ from fastapi import FastAPI, status
 # import models
 
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
-
-DATABASE_URL = os.getenv('DATABASE_URL')
 
 app = FastAPI()
 
@@ -60,11 +57,6 @@ app = FastAPI()
 
 @app.get("/", status_code=200)
 def test():
-    global DATABASE_URL
-    print('teste', DATABASE_URL)
-    if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
-        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-    print('teste2', DATABASE_URL)
     from database import Base, SessionLocal, engine
     Base.metadata.create_all(engine)
-    return DATABASE_URL
+    return engine.url
