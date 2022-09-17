@@ -12,6 +12,8 @@ import os
 load_dotenv()
 
 DATABASE_URL = os.getenv('DATABASE_URL')
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 app = FastAPI()
 
@@ -62,7 +64,5 @@ app = FastAPI()
 def test():
     print('teste')
     from database import Base, SessionLocal, engine
-    if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
-        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
     Base.metadata.create_all(engine)
     return DATABASE_URL
