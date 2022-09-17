@@ -4,7 +4,7 @@ from fastapi import FastAPI, status
 
 # from schemas import BaseUser, User
 
-from database import SessionLocal
+from database import Base, SessionLocal, engine
 
 # import models
 
@@ -62,4 +62,5 @@ app = FastAPI()
 
 @app.get("/", status_code=200)
 def test():
+    Base.metadata.create_all(engine)
     return DATABASE_URL
