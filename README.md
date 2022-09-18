@@ -53,15 +53,8 @@ pip install -r requirements.txt
 
 - Dentro desse arquivo coloque o seguinte conteúdo:
 ```
-DATABASE_URL='postgresql://user:password@localhost/name_db'
+DATABASE_URL='postgresql://user:password@port/name_db'
 ```
-
-### Criando o Bando de Dados
-- Rode o comando:
-```
-python create_db.py
-```
-
 
 ### Rodar Aplicação
 - Utilizar o comando:
