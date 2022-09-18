@@ -1,5 +1,10 @@
 # jujuba-backend
 
+## Acesso ao Swagger
+Deploy realizado no heroku:
+
+**[jujuba-api](https://jujuba-api.herokuapp.com/docs#)**
+
 ### VirtualEnv
 - Criar um [virtualenv](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
 
@@ -56,7 +61,7 @@ pip install -r requirements.txt
 DATABASE_URL='postgresql://user:password@port/name_db'
 ```
 
-### Rodar Aplicação
+### Rodar Aplicação Local
 - Utilizar o comando:
 ```
 uvicorn main:app --reload
@@ -66,3 +71,8 @@ uvicorn main:app --reload
 http://localhost:8000/docs
 ```
 - Ou aperte F5 que já rodará aplicação com o debbuger
+
+### Débitos Tecnicos
+[ ] Adicionar token de autenticação para o login  
+[ ] Realizar testes unitários  
+[ ] Adicionar validações (letra maiuscula/minuscula, espaços...)  
