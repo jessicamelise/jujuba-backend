@@ -11,4 +11,6 @@ class BaseUser(BaseModel):
 
 class User(BaseUser):
     id: int
-    
+
+class CreateUser(BaseUser):
+    password: str = Field(..., max_length=100)
