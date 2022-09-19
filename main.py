@@ -2,6 +2,8 @@ from typing import List
 
 from fastapi import FastAPI, HTTPException, status, Depends
 
+from fastapi.middleware.cors import CORSMiddleware
+
 from schemas import BaseUser, User, CreateUser
 
 from sqlalchemy.orm import Session
@@ -16,6 +18,14 @@ load_dotenv()
 models.Base.metadata.create_all(engine)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/users", response_model=List[User], status_code=200)
 def get_users(db: Session = Depends(get_db)):
@@ -61,7 +71,7 @@ def update_user(user: BaseUser, user_id: int, db: Session = Depends(get_db)):
     return User(**db_update_user.__dict__)
 
 
-@app.delete("/user/{user_id}", response_model=str, status_code=status.HTTP_200_OK)
+@app.delete("/users/{user_id}", response_model=str, status_code=status.HTTP_200_OK)
 def delete_user(user_id: int, db: Session = Depends(get_db)):
     db_user=db.query(models.User).filter(models.User.id==user_id).first()
     if db_user is None:
