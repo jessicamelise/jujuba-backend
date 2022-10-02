@@ -14,3 +14,15 @@ class User(BaseUser):
 
 class CreateUser(BaseUser):
     password: str = Field(..., max_length=100)
+
+class BaseProduct(BaseModel):
+    name: str = Field(..., max_length=100)
+    description: str = Field(..., max_length=200)
+    price: str = Field(..., max_length=20)
+    type: str = Field(..., max_length=50)
+
+    class Config:
+        orm_mode: True
+
+class Product(BaseProduct):
+    id: int
