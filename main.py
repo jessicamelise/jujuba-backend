@@ -112,9 +112,6 @@ def create_product(product: BaseProduct, db: Session = Depends(get_db)):
 
 @app.put("/products/{product_id}", response_model=Product, status_code=status.HTTP_200_OK, tags=['Product'])
 def update_product(product: BaseProduct, product_id: int, db: Session = Depends(get_db)):
-    db_product = db.query(models.Product).filter(models.Product.name==product.name).first()
-    if db_product:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Produto já cadastrado")
     db_update_product=db.query(models.Product).filter(models.Product.id==product_id).first()
     if db_update_product is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Produto não encontrado")
