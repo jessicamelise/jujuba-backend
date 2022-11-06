@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel, Field
 
 class BaseUser(BaseModel):
@@ -26,3 +27,24 @@ class BaseProduct(BaseModel):
 
 class Product(BaseProduct):
     id: int
+
+class OrderItem(BaseModel):
+    name: str = Field(..., max_length=100)
+
+class BaseOrder(BaseModel):
+    order_number: int
+    status: str = Field(..., max_length=100)
+    date: str = Field(..., max_length=100)
+    items: List[OrderItem]
+
+    class Config:
+        orm_mode: True
+
+class Order(BaseOrder):
+    ...
+
+class CreateOrderItem(BaseModel):
+    product_id: int
+
+class CreateOrder(BaseModel):
+    items: List[CreateOrderItem]
