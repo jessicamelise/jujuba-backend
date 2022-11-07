@@ -158,7 +158,7 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
 
 @app.get("/orders", response_model=List[Order], status_code=200, tags=['Order'])
 def get_orders(db: Session = Depends(get_db)):
-    db_orders: List[models.Order] = db.query(models.Order).all()
+    db_orders: List[models.Order] = db.query(models.Order).order_by(models.Order.order_number).all()
     return [Order(
         order_number=db_order.order_number,
         status=db_order.status,
@@ -184,4 +184,22 @@ def create_order(order: CreateOrder, db: Session = Depends(get_db)):
         date=db_new_order.date,
         items=[OrderItem(name=db_order_item.product.name)
                for db_order_item in db_new_order.items]
+    )
+
+@app.put("/orders", response_model=Order, status_code=status.HTTP_201_CREATED, tags=['Order'])
+def update_order(order_number: int, current_status: str, db: Session = Depends(get_db)):
+    db_update_order = db.query(models.Order).filter(models.Order.order_number == order_number).first()
+    if db_update_order is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail="Pedido não encontrado")
+    db_update_order.date = datetime.datetime.now().date().strftime('%m/%d/%Y'),
+    db_update_order.status = 'em andamento' if current_status == 'pendente' else 'concluido'
+    db.commit()
+    db.refresh(db_update_order)
+    return Order(
+        order_number=db_update_order.order_number,
+        status=db_update_order.status,
+        date=db_update_order.date,
+        items=[OrderItem(name=db_order_item.product.name)
+               for db_order_item in db_update_order.items]
     )
