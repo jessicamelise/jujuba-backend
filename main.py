@@ -172,7 +172,7 @@ def get_orders(db: Session = Depends(get_db)):
 def create_order(order: CreateOrder, db: Session = Depends(get_db)):
     db_new_order = models.Order(
         status="pendente",
-        date=datetime.datetime.now().date().strftime('%m/%d/%Y'),
+        date=datetime.datetime.now().date().strftime("%d/%m/%Y"),
         items=[models.OrderItem(product_id=order_item.product_id) for order_item in order.items]
     )
     db.add(db_new_order)
@@ -192,7 +192,7 @@ def update_order(order_number: int, current_status: str, db: Session = Depends(g
     if db_update_order is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail="Pedido não encontrado")
-    db_update_order.date = datetime.datetime.now().date().strftime('%m/%d/%Y'),
+    db_update_order.date = datetime.datetime.now().date().strftime("%d/%m/%Y"),
     db_update_order.status = 'em andamento' if current_status == 'pendente' else 'concluido'
     db.commit()
     db.refresh(db_update_order)
